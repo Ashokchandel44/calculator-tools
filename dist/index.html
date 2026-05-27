@@ -1,17 +1,87 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Problem Solving Tools</title>
-    <meta
-      name="description"
-      content="A collection of useful daily problem solving tools built with React and Vite."
-    />
-    <script type="module" crossorigin src="/calculators/assets/index-CfFfsSL7.js"></script>
-    <link rel="stylesheet" crossorigin href="/calculators/assets/index-BtVTLi3-.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-  </html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Title -->
+  <title>Free Online Calculator Tools – Age, EMI, Word Counter & More</title>
+
+  <!-- SEO Description -->
+  <meta name="description"
+    content="Use free online calculator tools like Age Calculator, EMI Calculator, Word Counter and Date Calculator. Fast, simple and accurate tools for daily use." />
+
+  <!-- Keywords -->
+  <meta name="keywords" content="age calculator, emi calculator, word counter, online tools, free calculator tools" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://travelwithanki.com/calculators/" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png"
+    href="https://travelwithanki.com/wp-content/uploads/2024/06/cropped-apple-touch-icon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free Online Calculator Tools – Age, EMI, Word Counter & More" />
+  <meta property="og:description"
+    content="Use free online calculator tools like Age Calculator, EMI Calculator, Word Counter and Date Calculator." />
+  <meta property="og:url" content="https://travelwithanki.com/calculators/" />
+  <meta property="og:image"
+    content="https://travelwithanki.com/wp-content/uploads/2024/06/cropped-apple-touch-icon.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Free Online Calculator Tools – Age, EMI, Word Counter & More" />
+  <meta name="twitter:description" content="Free online calculator tools for daily use." />
+  <meta name="twitter:image"
+    content="https://travelwithanki.com/wp-content/uploads/2024/06/cropped-apple-touch-icon.png" />
+
+  <!-- Google AdSense Blocked for Selected IP -->
+  <script>
+    (async function () {
+      const blockedIps = ['122.160.255.97'];
+
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        const userIp = data.ip;
+
+        if (!blockedIps.includes(userIp)) {
+          const script = document.createElement('script');
+          script.async = true;
+          script.src =
+            'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3824838200519641';
+          script.crossOrigin = 'anonymous';
+
+          document.head.appendChild(script);
+        }
+      } catch (error) {
+        console.log('IP check failed');
+      }
+    })();
+  </script>
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Free Online Calculator Tools",
+    "url": "https://travelwithanki.com/calculators/",
+    "applicationCategory": "Utilities",
+    "operatingSystem": "All"
+  }
+  </script>
+  <script type="module" crossorigin src="/calculators/assets/index-CfFfsSL7.js"></script>
+  <link rel="stylesheet" crossorigin href="/calculators/assets/index-BtVTLi3-.css">
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- React Entry -->
+</body>
+
+</html>
