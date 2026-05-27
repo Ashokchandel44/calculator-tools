@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -18,13 +18,13 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
       - name: Fix vite permission
         run: chmod +x node_modules/.bin/vite
 
-      - name: Build Project
+      - name: Build project
         run: npm run build
 
       - name: Show built files
@@ -41,7 +41,7 @@ jobs:
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_HOST }}
+          server: 178.16.136.207
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
@@ -49,3 +49,4 @@ jobs:
           local-dir: dist/
           server-dir: /domains/travelwithanki.com/public_html/calculators/
           dangerous-clean-slate: true
+          timeout: 60000
