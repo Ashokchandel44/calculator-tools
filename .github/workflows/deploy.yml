@@ -49,4 +49,5 @@ jobs:
           local-dir: dist/
           server-dir: calculators/
           dangerous-clean-slate: true
-          timeout: 60000
+          log-level: verbose
+          timeout: 60000  
