@@ -44,10 +44,10 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
+          protocol: ftps
           port: 21 
           local-dir: dist/
-          server-dir: calculators/
+          server-dir: /calculators/
           dangerous-clean-slate: true
           log-level: verbose
           timeout: 60000  
