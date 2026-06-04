@@ -21,22 +21,26 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Fix vite permission
-        run: chmod +x node_modules/.bin/vite
-
       - name: Build project
         run: npm run build
 
-      - name: Show built files
+      - name: Verify build output
         run: |
-          echo "ROOT:"
+          echo "Current directory:"
           pwd
-          echo "DIST:"
+          echo "Dist contents:"
           ls -la dist
-          echo "ASSETS:"
-          ls -la dist/assets
-          echo "INDEX:"
-          cat dist/index.html
+
+      - name: Show FTP settings
+        run: |
+          echo "FTP Host: ${{ secrets.FTP_HOST }}"
+          echo "FTP User: ${{ secrets.FTP_USERNAME }}"
+
+      - name: Test FTP Port
+        run: |
+          timeout 10 bash -c '</dev/tcp/${{ secrets.FTP_HOST }}/21' \
+          && echo "FTP PORT OPEN" \
+          || echo "FTP PORT CLOSED"
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -45,8 +49,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
-          port: 21 
+          port: 21
           local-dir: ./dist/
           server-dir: /public_html/calculators/
-          dangerous-clean-slate: true
-           
+          dangerous-clean-slate: false
