@@ -46,8 +46,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21 
-          local-dir: dist/
-          server-dir: /calculators/
+          local-dir: ./dist/
+          server-dir: /public_html/calculators/
           dangerous-clean-slate: true
-          log-level: verbose
-          timeout: 60000  
+           
