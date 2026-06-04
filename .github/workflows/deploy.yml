@@ -13,17 +13,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
+      # ✅ CLEAN + SAFE INSTALL (IMPORTANT FIX)
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
+      # ✅ FIX VITE PERMISSION ISSUE
+      - name: Fix vite permissions
+        run: chmod +x node_modules/.bin/vite
+
+      # ✅ BUILD PROJECT
       - name: Build project
         run: npm run build
 
+      # 🔍 VERIFY BUILD OUTPUT
       - name: Verify build output
         run: |
           echo "Current directory:"
@@ -31,17 +39,20 @@ jobs:
           echo "Dist contents:"
           ls -la dist
 
-      - name: Show FTP settings
+      # 🔐 FTP DEBUG INFO (SAFE OUTPUT)
+      - name: Show FTP config (masked-safe)
         run: |
-          echo "FTP Host: ${{ secrets.FTP_HOST }}"
-          echo "FTP User: ${{ secrets.FTP_USERNAME }}"
+          echo "FTP Host is configured"
+          echo "FTP Username is configured"
 
-      - name: Test FTP Port
+      # 🌐 TEST FTP CONNECTION
+      - name: Test FTP port
         run: |
           timeout 10 bash -c '</dev/tcp/${{ secrets.FTP_HOST }}/21' \
           && echo "FTP PORT OPEN" \
           || echo "FTP PORT CLOSED"
 
+      # 🚀 DEPLOY TO FTP
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
