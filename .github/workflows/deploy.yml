@@ -13,54 +13,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
-      # ✅ CLEAN + SAFE INSTALL (IMPORTANT FIX)
       - name: Install dependencies
         run: npm ci
 
-      # ✅ FIX VITE PERMISSION ISSUE
-      - name: Fix vite permissions
-        run: chmod +x node_modules/.bin/vite
-
-      # ✅ BUILD PROJECT
       - name: Build project
         run: npm run build
 
-      # 🔍 VERIFY BUILD OUTPUT
-      - name: Verify build output
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Dist contents:"
-          ls -la dist
+      - name: Check build output
+        run: ls -la dist
 
-      # 🔐 FTP DEBUG INFO (SAFE OUTPUT)
-      - name: Show FTP config (masked-safe)
-        run: |
-          echo "FTP Host is configured"
-          echo "FTP Username is configured"
-
-      # 🌐 TEST FTP CONNECTION
-      - name: Test FTP port
-        run: |
-          timeout 10 bash -c '</dev/tcp/${{ secrets.FTP_HOST }}/21' \
-          && echo "FTP PORT OPEN" \
-          || echo "FTP PORT CLOSED"
-
-      # 🚀 DEPLOY TO FTP
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
+
           port: 21
-          local-dir: ./dist/
-          server-dir: /public_html/calculators/
+          protocol: ftp
+
+          local-dir: dist/
+          server-dir: calculators/
+
+          log-level: verbose
           dangerous-clean-slate: false
